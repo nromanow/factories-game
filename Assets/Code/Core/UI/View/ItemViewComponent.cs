@@ -6,6 +6,10 @@ namespace Code.Core.UI.View {
 
 		public void SetItem (T value) {
 			item = value;
+			
+			Initialize();
 		}
+
+		public virtual void Initialize (){}
 	}
 }

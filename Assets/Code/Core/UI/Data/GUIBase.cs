@@ -3,16 +3,8 @@
 namespace Code.Core.UI.Data {
 	public class GUIBase : MonoBehaviour {
 		[SerializeField]
-		private GUILayer _baseLayer;
+		private GUILayer[] _layers;
 		
-		[SerializeField]
-		private GUILayer _popupLayer;
-		
-		[SerializeField]
-		private GUILayer _hudLayer;
-		
-		public GUILayer baseLayer => _baseLayer;
-		public GUILayer popupLayer => _popupLayer;
-		public GUILayer hudLayer => _hudLayer;
+		public GUILayer[] layers => _layers;
 	}
 }

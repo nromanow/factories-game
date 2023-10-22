@@ -21,6 +21,10 @@ namespace Code.Manufactures.UI.App {
 			_uiScreenService.ShowScreen(_settings.manufactureScreenReference, viewModel);
 		}
 
+		public void CloseManufactureScreen () {
+			_uiScreenService.CloseScreen(_settings.manufactureScreenReference);
+		}
+
 		[Serializable]
 		public class Settings {
 			[SerializeField]

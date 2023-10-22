@@ -5,5 +5,7 @@ namespace Code.Menu.UI.Api {
 		void ShowMenuSettingsScreen (MenuManufacturesSettingsScreenViewModel viewModel);
 
 		void ShowMenuScreen (MenuScreenViewModel viewModel);
+		
+		void CloseMenuScreen ();
 	}
 }

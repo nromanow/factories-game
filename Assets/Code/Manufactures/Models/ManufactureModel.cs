@@ -1,45 +1,28 @@
-﻿using Code.Manufactures.Data;
+﻿using Code.Core.Models;
+using Code.Manufactures.Data;
 using Code.Materials.Models;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Code.Manufactures.Models {
-	public class ManufactureModel : IDisposable {
-		private CancellationTokenSource _cancellationTokenSource = new();
-
-		public event Action<MaterialModel> onItemCreated;
-
-		public bool isManufacturing { get; private set; }
+	public class ManufactureModel : ProductionModel<MaterialModel> {
 		public ManufactureSettings settings { get; }
 
 		public ManufactureModel (ManufactureSettings settings) {
 			this.settings = settings;
 		}
 
-		public void Start () {
-			StartManufacturing(_cancellationTokenSource.Token).Start();
-
-			isManufacturing = true;
-		}
-
-		public void Stop () {
-			_cancellationTokenSource.Cancel();
-			_cancellationTokenSource.Dispose();
-			_cancellationTokenSource = new CancellationTokenSource();
-
-			isManufacturing = false;
-		}
-
-		private async Task StartManufacturing (CancellationToken cancellationToken) {
+		protected override async Task StartProduction (CancellationToken cancellationToken) {
+			isProduction = true;
+			onProductionStateChanged?.Invoke(isProduction);
+			
 			while (!cancellationToken.IsCancellationRequested) {
-				await Task.Delay(settings.deltaTime, cancellationToken);
+				await Task.Delay(settings.deltaTime * 1000, cancellationToken);
 				onItemCreated?.Invoke(settings.material);
+				Debug.Log($"{settings.material.info.titleLocId} are created at {DateTime.Now}");
 			}
-		}
-
-		public void Dispose () {
-			_cancellationTokenSource?.Dispose();
 		}
 	}
 }

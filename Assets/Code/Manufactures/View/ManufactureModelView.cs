@@ -1,13 +1,13 @@
 ﻿using Code.Core.View;
-using Code.Manufactures.Data;
 using Code.Manufactures.Models;
+using Code.Materials.Data;
 using UnityEngine;
 
 namespace Code.Manufactures.View {
 	public class ManufactureModelView : InteractableLandItemView<ManufactureModel> {
 		[SerializeField]
-		private ManufactureSettings _manufactureType;
-		
-		public ManufactureSettings manufactureType => _manufactureType;
+		private MaterialInfo _materialInfo;
+
+		public MaterialInfo materialInfo => _materialInfo;
 	}
 }

@@ -23,6 +23,10 @@ namespace Code.Menu.UI.App {
 			_screenService.ShowScreen(_settings.menuScreen, viewModel);
 		}
 
+		public void CloseMenuScreen () {
+			_screenService.CloseScreen(_settings.menuScreen);
+		}
+
 		[Serializable]
 		public class Settings {
 			[SerializeField]

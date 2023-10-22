@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _uiSettings:
     _menuSettingsScreen: {fileID: 0}
-    _menuScreen: {fileID: 0}
+    _menuScreen: {fileID: 11400000, guid: 6c1c5677c8df8fe40a71bacc0725df3a, type: 2}
