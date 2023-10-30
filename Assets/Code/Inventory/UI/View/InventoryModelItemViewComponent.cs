@@ -23,9 +23,10 @@ namespace Code.Inventory.UI.View {
 
 		private void OnItemsChanged () {
 			foreach (var itemChild in _items) {
-				_items.Remove(itemChild);
 				Destroy(itemChild);
 			}
+			
+			_items.Clear();
 			
 			foreach (var inventoryItem in item.items) {
 				var inventoryItemView = Instantiate(_inventoryItemForm.form, _contentRoot);

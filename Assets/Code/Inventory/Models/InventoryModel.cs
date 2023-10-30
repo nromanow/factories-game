@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace Code.Inventory.Models {
 	public class InventoryModel {
@@ -8,12 +9,12 @@ namespace Code.Inventory.Models {
 
 		public event Action onItemsChanged;
 		
-		public bool HasItemBySourceType<T> (T sourceType) {
-			return items.Any(i => i.source.Equals(sourceType));
+		public bool HasItemBySourceType (Type sourceType) {
+			return items.Any(i => i.source.GetType() == sourceType);
 		}
 		
-		public InventoryItemModel[] GetItemsBySourceType<T> (T sourceType) {
-			return items.Where(i => i.source.Equals(sourceType)).ToArray();
+		public InventoryItemModel[] GetItemsBySourceType (Type sourceType) {
+			return items.Where(i => i.source.GetType() == sourceType).ToArray();
 		}
 		
 		public bool HasItemBySourceType<T> (T sourceType, out InventoryItemModel item) {
@@ -22,11 +23,6 @@ namespace Code.Inventory.Models {
 		}
 		
 		public void AddItem (InventoryItemModel item) {
-			if (HasItemBySourceType(item.source, out var invItem)) {
-				invItem.SetAmount(invItem.amount + item.amount);
-				return;
-			}
-			
 			items.Add(item);
 			onItemsChanged?.Invoke();
 		}

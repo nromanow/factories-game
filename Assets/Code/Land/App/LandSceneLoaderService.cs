@@ -3,6 +3,8 @@ using Code.Inventory.Models;
 using Code.Inventory.UI.Api;
 using Code.Land.Api;
 using Code.Manufactures.Api;
+using Code.Store.Api;
+using Code.Store.Models;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +16,8 @@ namespace Code.Land.App {
 		private readonly IFactoriesService _factoriesService;
 		private readonly IManufactureLandInitializerService _manufactureLandInitializerService;
 		private readonly IFactoriesLandInitializerService _factoriesLandInitializerService;
+		private readonly IStoreInitializerLandService _storeInitializerLandService;
+		private readonly StoreModel _storeModel;
 		private readonly InventoryModel _inventoryModel;
 		private readonly IInventoryUIService _inventoryUIService;
 		private readonly List<IDisposable> _disposables = new();
@@ -23,12 +27,16 @@ namespace Code.Land.App {
 			IFactoriesService factoriesService,
 			IManufactureLandInitializerService manufactureLandInitializerService,
 			IFactoriesLandInitializerService factoriesLandInitializerService,
+			IStoreInitializerLandService storeInitializerLandService,
+			StoreModel storeModel,
 			InventoryModel inventoryModel,
 			IInventoryUIService inventoryUIService) {
 			_manufacturesService = manufacturesService;
 			_factoriesService = factoriesService;
 			_manufactureLandInitializerService = manufactureLandInitializerService;
 			_factoriesLandInitializerService = factoriesLandInitializerService;
+			_storeInitializerLandService = storeInitializerLandService;
+			_storeModel = storeModel;
 			_inventoryModel = inventoryModel;
 			_inventoryUIService = inventoryUIService;
 		}
@@ -53,8 +61,10 @@ namespace Code.Land.App {
 			}
 			
 			_disposables.AddRange(manufactures);
+			_disposables.AddRange(factories);
 			_manufactureLandInitializerService.InitializeManufactures(manufactures);
 			_factoriesLandInitializerService.InitializeFactoriesViews(factories);
+			_storeInitializerLandService.InitializeStoreView(new [] { _storeModel });
 			_inventoryUIService.ShowHUD(_inventoryModel);
 		}
 

@@ -11,4 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LandScene.unity
     guid: 8e2f6b321f949cf4fbef277fea2f30e6
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
+      guid: 667a9be862545164a8fab37549fb1509, type: 2}

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd3c41db45cf4889b8f956eb7ebbedcb, type: 3}
+  m_Name: StoreModule
+  m_EditorClassIdentifier: 
+  _uiSettings:
+    _storeScreenForm: {fileID: 11400000, guid: 74b7b2ad92c7467498beb2dabac2baaa, type: 2}
+    _selectedStoreScreenForm: {fileID: 11400000, guid: d13060d05066ae24aa581a2e73ed4d41,
+      type: 2}

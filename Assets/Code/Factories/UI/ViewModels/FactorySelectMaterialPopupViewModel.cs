@@ -1,14 +1,13 @@
 ﻿using Code.Core.UI.ViewModels;
 using Code.Materials.Models;
-using Code.Materials.UI.ViewModels;
 using System;
 
 namespace Code.Factories.UI.ViewModels {
 	public class FactorySelectMaterialPopupViewModel : BaseViewModel {
 		public event Action<MaterialModel> onMaterialSelected;
-		public SelectableMaterialViewModel[] materials { get; }
+		public SelectableItemViewModel<MaterialModel>[] materials { get; }
 
-		public FactorySelectMaterialPopupViewModel (SelectableMaterialViewModel[] materials) {
+		public FactorySelectMaterialPopupViewModel (SelectableItemViewModel<MaterialModel>[] materials) {
 			this.materials = materials;
 
 			foreach (var material in materials) {

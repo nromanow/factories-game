@@ -14,8 +14,8 @@ namespace Code.Inventory.Models {
 			this.icon = icon;
 		}
 		
-		public void SetAmount (int amount) {
-			this.amount = amount;
+		public void SetAmount (int value) {
+			this.amount = value;
 			onAmountChanged?.Invoke();
 		}
 	}

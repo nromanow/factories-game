@@ -6,6 +6,8 @@ using System.Linq;
 namespace Code.Tools.App {
 	public static class ToolsMap {
 		public static ToolModel GetToolFromMaterials (MaterialModel leftMaterial, MaterialModel rightMaterial) {
+			if (leftMaterial == null || rightMaterial == null) return null;
+			
 			var array = new[] { leftMaterial.materialId, rightMaterial.materialId };
 			
 			if (array.Contains("Wood") && array.Contains("Stone")) {

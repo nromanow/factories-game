@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Code.Core.View {
 	public class InteractableLandItemView<T> : MonoBehaviour where T : class {
@@ -12,7 +13,9 @@ namespace Code.Core.View {
 		}
 
 		private void OnMouseDown () {
-			onItemClicked?.Invoke();
+			if (!EventSystem.current.IsPointerOverGameObject()) {
+				onItemClicked?.Invoke();
+			}
 		}
 	}
 }

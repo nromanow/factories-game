@@ -1,10 +1,10 @@
-﻿using Code.Factories.Api;
+﻿using Code.Core.UI.ViewModels;
+using Code.Factories.Api;
 using Code.Factories.Models;
 using Code.Factories.UI.Api;
 using Code.Factories.UI.ViewModels;
 using Code.Inventory.Models;
 using Code.Materials.Models;
-using Code.Materials.UI.ViewModels;
 using System.Linq;
 
 namespace Code.Factories.App {
@@ -56,7 +56,7 @@ namespace Code.Factories.App {
 			var selectableMaterials =
 				availableMaterialsItems
 					.Select(x =>
-						new SelectableMaterialViewModel(x.source as MaterialModel))
+						new SelectableItemViewModel<MaterialModel>(x.source as MaterialModel))
 					.ToArray();
 
 			var selectViewModel = new FactorySelectMaterialPopupViewModel(selectableMaterials);
