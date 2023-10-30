@@ -23,7 +23,7 @@ namespace Code.Manufactures.App {
 			var manufacturesList = new List<ManufactureModel>();
 			
 			for (var i = 0; i < _paramIndex; i++) {
-				manufacturesList.Add(new ManufactureModel(new ManufactureSettings(availableMaterials[i], 1)));
+				manufacturesList.Add(new ManufactureModel(new ManufactureSettings(availableMaterials[i])));
 			}
 
 			return manufacturesList.ToArray();

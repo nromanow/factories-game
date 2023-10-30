@@ -9,11 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aba4345f86c04582acff887623341b4a, type: 3}
-  m_Name: ForkTool
+  m_Script: {fileID: 11500000, guid: 1c7fff22c3bd4e50879431866042856b, type: 3}
+  m_Name: SaveModule
   m_EditorClassIdentifier: 
-  _titleLocId: Fork
-  _sprite: {fileID: 21300000, guid: 96ff8090ed400444ca45e8ef17e76f0c, type: 3}
-  _sellCurrencyType: Hard
-  _sellPrice: 1
-  _generateCount: 1

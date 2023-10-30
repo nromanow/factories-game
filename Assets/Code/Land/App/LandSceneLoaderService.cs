@@ -3,10 +3,12 @@ using Code.Inventory.Models;
 using Code.Inventory.UI.Api;
 using Code.Land.Api;
 using Code.Manufactures.Api;
+using Code.Materials.Models;
 using Code.Store.Api;
 using Code.Store.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -49,15 +51,24 @@ namespace Code.Land.App {
 			var manufactures = _manufacturesService.GetStartManufactures();
 			var factories = _factoriesService.GetStartedFactories();
 
+			var materialsInvItems = _inventoryModel.GetItemsBySourceType(typeof(MaterialModel));
+			
 			foreach (var manufacture in manufactures) {
-				var inventoryItemModel = 
-					new InventoryItemModel(manufacture.settings.material, 0, manufacture.settings.material.info.sprite);
+				var targetItem = materialsInvItems.SingleOrDefault(x => (x.source as MaterialModel).info == manufacture.settings.material.info);
 
-				_inventoryModel.AddItem(inventoryItemModel);
-				
-				manufacture.onItemCreated += item => {
-					inventoryItemModel.SetAmount(inventoryItemModel.amount + 1);
-				};
+				if (targetItem == null) {
+					var inventoryItemModel = new InventoryItemModel(manufacture.settings.material, 0, manufacture.settings.material.info.sprite);
+					_inventoryModel.AddItem(inventoryItemModel);
+					
+					manufacture.onItemCreated += item => {
+						inventoryItemModel.SetAmount(inventoryItemModel.amount + 1);
+					};
+				}
+				else {
+					manufacture.onItemCreated += item => {
+						targetItem.SetAmount(targetItem.amount + 1);
+					};
+				}
 			}
 			
 			_disposables.AddRange(manufactures);

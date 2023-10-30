@@ -1,15 +1,13 @@
 ﻿using Code.Materials.Models;
-using System;
 
 namespace Code.Manufactures.Data {
-	[Serializable]
 	public class ManufactureSettings {
 		public MaterialModel material { get; }
 		public int deltaTime { get; }
 
-		public ManufactureSettings (MaterialModel material, int deltaTime) {
+		public ManufactureSettings (MaterialModel material) {
 			this.material = material;
-			this.deltaTime = deltaTime;
+			this.deltaTime = material.info.generationTime;
 		}
 	}
 }

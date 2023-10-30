@@ -9,9 +9,13 @@ namespace Code.Tools.Data {
 		
 		[SerializeField]
 		private int _sellPrice;
+
+		[SerializeField]
+		private int _generateCount;
 		
 		public string sellCurrencyType => _sellCurrencyType;
 		public int sellPrice => _sellPrice;
+		public int generateCount => _generateCount;
 		
 		public static ToolInfo GetInfo (string key) {
 			return ItemsList.GetItem<ToolInfo>($"{key}Tool");

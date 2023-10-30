@@ -15,9 +15,9 @@ namespace Code.Factories.Models {
 		
 		private readonly InventoryModel _inventoryModel;
 
-		public event Action<MaterialModel> onLeftMaterialChanged;
-		public event Action<MaterialModel> onRightMaterialChanged;
-		public event Action<ToolModel> onToolChanged;
+		public event Action onLeftMaterialChanged;
+		public event Action onRightMaterialChanged;
+		public event Action onToolChanged;
 
 		public MaterialModel leftMaterial { get; private set; }
 		public MaterialModel rightMaterial { get; private set; }
@@ -31,13 +31,13 @@ namespace Code.Factories.Models {
 
 		public void SetLeftMaterial (MaterialModel value) {
 			leftMaterial = value;
-			onLeftMaterialChanged?.Invoke(leftMaterial);
+			onLeftMaterialChanged?.Invoke();
 			UpdateTool();
 		}
 
 		public void SetRightMaterial (MaterialModel value) {
 			rightMaterial = value;
-			onRightMaterialChanged?.Invoke(rightMaterial);
+			onRightMaterialChanged?.Invoke();
 			UpdateTool();
 		}
 
@@ -45,7 +45,7 @@ namespace Code.Factories.Models {
 			Stop();
 			
 			tool = ToolsMap.GetToolFromMaterials(leftMaterial, rightMaterial);
-			onToolChanged?.Invoke(tool);
+			onToolChanged?.Invoke();
 		}
 
 		protected override async Task StartProduction (CancellationToken cancellationToken) {
@@ -58,7 +58,7 @@ namespace Code.Factories.Models {
 			
 			var toolsItems = _inventoryModel.GetItemsBySourceType(typeof(ToolModel));
 			
-			var toolItem = toolsItems.SingleOrDefault(x => x.source as ToolModel == tool);
+			var toolItem = toolsItems.SingleOrDefault(x => (x.source as ToolModel).info == tool.info);
 
 			if (toolItem == null) {
 				toolItem = new InventoryItemModel(tool, 0, tool.info.sprite);
@@ -79,7 +79,7 @@ namespace Code.Factories.Models {
 				leftItem.SetAmount(leftItem.amount - REQUIRED_MATERIAL_VALUE);
 				rightItem.SetAmount(rightItem.amount - REQUIRED_MATERIAL_VALUE);
 				
-				toolItem.SetAmount(toolItem.amount + 1);
+				toolItem.SetAmount(toolItem.amount + tool.info.generateCount);
 
 				onItemCreated?.Invoke(tool);
 				Debug.Log($"{tool.toolId} are created at {DateTime.Now}");

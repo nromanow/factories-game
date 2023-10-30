@@ -1,7 +1,5 @@
 ﻿using Code.Core.UI.View;
 using Code.Factories.UI.ViewModels;
-using Code.Materials.Models;
-using Code.Tools.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -51,10 +49,10 @@ namespace Code.Factories.UI.View {
 		public override void Initialize () {
 			base.Initialize();
 
-			OnToolChanged(item.model.tool);
-			OnLeftMaterialChanged(item.model.leftMaterial);
-			OnRightMaterialChanged(item.model.rightMaterial);
-			OnProductionStateChanged(item.model.isProduction);
+			OnToolChanged();
+			OnLeftMaterialChanged();
+			OnRightMaterialChanged();
+			OnProductionStateChanged(item.productionState);
 			
 			item.model.onToolChanged += OnToolChanged;
 			item.model.onLeftMaterialChanged += OnLeftMaterialChanged;
@@ -80,16 +78,16 @@ namespace Code.Factories.UI.View {
 			}
 		}
 
-		private void OnLeftMaterialChanged (MaterialModel material) {
-			_leftMaterialImage.sprite = material != null ? material.info.sprite : _defaultMaterialSprite;
+		private void OnLeftMaterialChanged () {
+			_leftMaterialImage.sprite = item.leftMaterialNotNull ? item.GetLeftMaterialIcon() : _defaultMaterialSprite;
 		}
 
-		private void OnRightMaterialChanged (MaterialModel material) {
-			_rightMaterialImage.sprite = material != null ? material.info.sprite : _defaultMaterialSprite;
+		private void OnRightMaterialChanged () {
+			_rightMaterialImage.sprite = item.rightMaterialNotNull ? item.GetRightMaterialIcon() : _defaultMaterialSprite;
 		}
 
-		private void OnToolChanged (ToolModel tool) {
-			_toolImage.sprite = tool != null ? tool.info.sprite : _defaultToolSprite;
+		private void OnToolChanged () {
+			_toolImage.sprite = item.toolNotNull ? item.GetToolIcon() : _defaultToolSprite;
 		}
 	}
 }

@@ -8,6 +8,8 @@ using UnityEngine;
 
 namespace Code.Manufactures.Models {
 	public class ManufactureModel : ProductionModel<MaterialModel> {
+		private const int MILLISECONDS_IN_SECOND = 1000;
+		
 		public ManufactureSettings settings { get; }
 
 		public ManufactureModel (ManufactureSettings settings) {
@@ -19,7 +21,7 @@ namespace Code.Manufactures.Models {
 			onProductionStateChanged?.Invoke(isProduction);
 			
 			while (!cancellationToken.IsCancellationRequested) {
-				await Task.Delay(settings.deltaTime * 1000, cancellationToken);
+				await Task.Delay(settings.deltaTime * MILLISECONDS_IN_SECOND, cancellationToken);
 				onItemCreated?.Invoke(settings.material);
 				Debug.Log($"{settings.material.info.titleLocId} are created at {DateTime.Now}");
 			}

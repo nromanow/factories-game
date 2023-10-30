@@ -28,7 +28,7 @@ namespace Code.Inventory.UI.View {
 			
 			_items.Clear();
 			
-			foreach (var inventoryItem in item.items) {
+			foreach (var inventoryItem in item.GetItems()) {
 				var inventoryItemView = Instantiate(_inventoryItemForm.form, _contentRoot);
 				inventoryItemView
 					.GetComponentInChildren<InventoryItemModelView>()

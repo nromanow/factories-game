@@ -27,7 +27,7 @@ namespace Code.Manufactures.UI.View {
 		}
 
 		public override void Initialize () {
-			_icon.sprite = item.settings.material.info.sprite;
+			_icon.sprite = item.GetIcon();
 
 			if (!item.isManufacturing) {
 				_startButton.SetActive(true);

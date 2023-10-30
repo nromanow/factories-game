@@ -1,6 +1,7 @@
 ﻿using Code.Manufactures.Data;
 using Code.Manufactures.Models;
 using System;
+using UnityEngine;
 
 namespace Code.Manufactures.UI.ViewModels {
 	public class ManufactureScreenViewModel {
@@ -12,6 +13,10 @@ namespace Code.Manufactures.UI.ViewModels {
 		
 		public ManufactureScreenViewModel (ManufactureModel model) {
 			this.model = model;
+		}
+		
+		public Sprite GetIcon () {
+			return settings.material.info.sprite;
 		}
 		
 		public void CloseScreen () {
