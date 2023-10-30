@@ -8,6 +8,8 @@ using UnityEngine;
 
 namespace Code.Currency.App {
 	public class CurrenciesService : ICurrenciesService {
+		public event Action<CurrencyModel> onCurrencyChanged;
+		
 		private readonly InventoryModel _inventoryModel;
 
 		public CurrenciesService (InventoryModel inventoryModel) {
@@ -46,6 +48,8 @@ namespace Code.Currency.App {
 				var invItem = allCurrency.Single(x => x.source == targetCurrency);
 				invItem.SetAmount(targetCurrency.value);
 			}
+			
+			onCurrencyChanged?.Invoke(targetCurrency);
 		}
 	}
 }

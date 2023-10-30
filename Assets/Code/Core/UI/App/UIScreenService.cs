@@ -10,24 +10,34 @@ namespace Code.Core.UI.App {
 		private readonly GUIBase _guiBase;
 		private readonly Dictionary<GUIForm, GameObject> _instances = new();
 
-		public UIScreenService(GUIBase guiBase) {
+		public UIScreenService (GUIBase guiBase) {
 			_guiBase = guiBase;
 		}
 
 		public void ShowScreen<T> (GUIForm form, T argument) {
+			var instance = CreateScreenInstance(form);
+
+			instance.GetComponentInChildren<ItemViewComponent<T>>()?.SetItem(argument);
+		}
+
+		public void ShowScreen (GUIForm form) {
+			CreateScreenInstance(form);
+		}
+
+		private GameObject CreateScreenInstance (GUIForm form) {
 			var root = _guiBase.layers.Single(x => x.layer == form.layer).transform;
 			var instance = UnityEngine.Object.Instantiate(form.form.gameObject, root);
 
 			_instances.Add(form, instance);
-			
-			instance.GetComponentInChildren<ItemViewComponent<T>>()?.SetItem(argument);
+
+			return instance;
 		}
 
 		public void CloseScreen (GUIForm form) {
 			if (!_instances.TryGetValue(form, out var instance)) return;
 
 			_instances.Remove(form);
-				
+
 			UnityEngine.Object.Destroy(instance);
 		}
 	}
